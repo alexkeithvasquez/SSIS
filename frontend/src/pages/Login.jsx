@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Eye, EyeOff, Lock, User } from "lucide-react";
+import { Eye, EyeOff, Lock, User, GraduationCap, AlertCircle } from "lucide-react";
 import api from "../services/api";
 
 export default function Login() {
@@ -45,59 +45,63 @@ const handleSubmit = async (e) => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
-        <h1 className="text-2xl font-bold text-blue-900 text-center">CuyoTech University</h1>
+      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl shadow-sm border border-gray-200 w-full max-w-md">
+        <div className="w-14 h-14 rounded-2xl bg-blue-900 text-white flex items-center justify-center mx-auto mb-4 shadow-sm ring-4 ring-blue-50">
+          <GraduationCap className="w-8 h-8 text-amber-400" />
+        </div>
+        <h1 className="text-2xl font-bold text-gray-900 text-center tracking-tight">CuyoTech University</h1>
         <p className="text-sm text-gray-500 text-center mb-6">Student Services Information System</p>
 
         {errors.general && (
-          <div className="bg-red-50 text-red-600 text-sm p-3 rounded mb-4">
-            {errors.general[0]}
+          <div className="bg-red-50 border border-red-200 text-red-700 text-sm p-3.5 rounded-lg mb-5 flex items-start gap-2.5">
+            <AlertCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
+            <span>{errors.general[0]}</span>
           </div>
         )}
 
         <label className="block mb-4">
           <span className="text-sm font-medium text-gray-700">Username</span>
-          <div className="relative mt-1">
-            <User className="absolute left-3 top-2.5 w-4 h-4 text-gray-400" />
+          <div className="relative mt-1.5">
+            <User className="absolute left-3.5 top-3 w-4 h-4 text-gray-400" />
             <input
               type="text"
               required
               value={form.username}
               onChange={(e) => setForm({ ...form, username: e.target.value })}
-              className="w-full pl-10 pr-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
               placeholder="Enter username"
             />
           </div>
-          {errors.username && <p className="text-xs text-red-500 mt-1">{errors.username[0]}</p>}
+          {errors.username && <p className="text-xs text-red-500 mt-1.5 font-medium">{errors.username[0]}</p>}
         </label>
 
         <label className="block mb-6">
           <span className="text-sm font-medium text-gray-700">Password</span>
-          <div className="relative mt-1">
-            <Lock className="absolute left-3 top-2.5 w-4 h-4 text-gray-400" />
+          <div className="relative mt-1.5">
+            <Lock className="absolute left-3.5 top-3 w-4 h-4 text-gray-400" />
             <input
               type={showPw ? "text" : "password"}
               required
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
-              className="w-full pl-10 pr-10 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+              className="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
               placeholder="Enter password"
             />
             <button
               type="button"
               onClick={() => setShowPw(!showPw)}
-              className="absolute right-3 top-2.5"
+              className="absolute right-3 top-2.5 p-0.5 text-gray-400 hover:text-gray-600 rounded transition-colors"
             >
               {showPw ? <EyeOff className="w-4 h-4 text-gray-400" /> : <Eye className="w-4 h-4 text-gray-400" />}
             </button>
           </div>
-          {errors.password && <p className="text-xs text-red-500 mt-1">{errors.password[0]}</p>}
+          {errors.password && <p className="text-xs text-red-500 mt-1.5 font-medium">{errors.password[0]}</p>}
         </label>
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-900 hover:bg-blue-800 text-white py-2.5 rounded-lg font-medium disabled:opacity-50"
+          className="w-full bg-blue-900 hover:bg-blue-800 text-white py-2.5 px-4 rounded-lg font-medium transition-colors shadow-xs disabled:opacity-50 cursor-pointer"
         >
           {loading ? "Signing in..." : "Sign In"}
         </button>
