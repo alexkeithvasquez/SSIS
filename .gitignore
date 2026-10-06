@@ -1,0 +1,24 @@
+# Node
+node_modules/
+dist/
+dist-ssr/
+*.local
+.vite/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Laravel (teammate)
+backend/vendor/
+backend/storage/*.key
+backend/.env
+backend/database/*.sqlite
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
